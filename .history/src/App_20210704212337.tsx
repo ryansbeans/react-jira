@@ -1,5 +1,6 @@
 import React from 'react';
-import { ProjectListScreen } from './screens/project-list/index'
+import logo from './logo.svg';
+
 function App() {
   return (
     <div className="App">
