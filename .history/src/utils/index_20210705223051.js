@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 export const isFalsy = (value) => value === 0 ? false : !value
 // 在一个函数里,改变传入的对象本身是不好的
 export const cleanObject = (object) => {
@@ -18,14 +18,15 @@ export const useMount = (callback) => {
     }, [])
 }
 
-export const useDebounce = (value, delay) => {
+export const usbDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value)
-    useEffect(() => {
-        // 每当value变化后,设置一个定时器
-        const timeout = setTimeout(() => setDebouncedValue(value), delay)
-        // 每次在上一个useEffect处理完后再执行
-        return () => clearTimeout(timeout)
-    }, [value, delay])
-    
-    return debouncedValue
+    let timeout
+    return () => {
+        if(timeout) {
+            clearTimeout(timeout)
+        }
+        timeout = setTimeout(() => {
+            func();
+        }, delay)
+    }
 }

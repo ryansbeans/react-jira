@@ -14,7 +14,7 @@ export const ProjectListScreen = () => {
     })
     const [list, setList] = useState([])  // 设置table的列表
     const [users, setUsers] = useState([])  // 设置option用户列表
-    const debouncedParam = useDebounce(param, 300)  // 设置table的列表
+    const debouncedParam = useDebounce(param, 2000)  // 设置table的列表
     useEffect(() => {
         fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async response => {
             if(response.ok) {
@@ -25,6 +25,7 @@ export const ProjectListScreen = () => {
 
 
     useMount(() => {
+            console.log(11);
         fetch(`${apiUrl}/users`).then(async response => {
             if(response.ok) {
                 setUsers(await response.json())

@@ -2,7 +2,7 @@ import React from "react"
 import { SearchPanel } from "./search-panel"
 import { List } from "./list"
 import { useEffect, useState } from "react"
-import { cleanObject, useMount, useDebounce } from "../../utils"
+import { cleanObject, useMount, debounce } from "../../utils"
 import qs from "qs"
 
 const apiUrl = process.env.REACT_APP_API_URL // 切换环境变量
@@ -14,7 +14,7 @@ export const ProjectListScreen = () => {
     })
     const [list, setList] = useState([])  // 设置table的列表
     const [users, setUsers] = useState([])  // 设置option用户列表
-    const debouncedParam = useDebounce(param, 300)  // 设置table的列表
+    const debouncedParam = usbDebounce(param, 2000)  // 设置table的列表
     useEffect(() => {
         fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async response => {
             if(response.ok) {
@@ -25,6 +25,7 @@ export const ProjectListScreen = () => {
 
 
     useMount(() => {
+            console.log(11);
         fetch(`${apiUrl}/users`).then(async response => {
             if(response.ok) {
                 setUsers(await response.json())
