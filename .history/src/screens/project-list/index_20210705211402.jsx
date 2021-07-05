@@ -2,7 +2,6 @@ import React from "react"
 import { SearchPanel } from "./search-panel"
 import { List } from "./list"
 import { useEffect, useState } from "react"
-import { cleanObject } from "../../utils"
 import qs from "qs"
 
 const apiUrl = process.env.REACT_APP_API_URL // 切换环境变量
@@ -15,7 +14,7 @@ export const ProjectListScreen = () => {
     const [list, setList] = useState([])  // 设置table的列表
     const [users, setUsers] = useState([])  // 设置option用户列表
     useEffect(() => {
-        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async response => {
+        fetch(`${apiUrl}/projects?${qs.stringify(param)}`).then(async response => {
             if(response.ok) {
                 setList(await response.json())
             }

@@ -2,8 +2,7 @@ import React from "react"
 import { SearchPanel } from "./search-panel"
 import { List } from "./list"
 import { useEffect, useState } from "react"
-import { cleanObject } from "../../utils"
-import qs from "qs"
+import * as qs from "qs"
 
 const apiUrl = process.env.REACT_APP_API_URL // 切换环境变量
 export const ProjectListScreen = () => {

@@ -15,6 +15,11 @@ export const ProjectListScreen = () => {
     const [list, setList] = useState([])  // 设置table的列表
     const [users, setUsers] = useState([])  // 设置option用户列表
     useEffect(() => {
+        console.log(JSON.stringify(param));
+        console.log(cleanObject(param));
+        // fetch(`${apiUrl}/projects?name=${JSON.stringify(cleanObject(param))}`).then(async response => {
+        // fetch(`${apiUrl}/projects`).then(async response => {
+
         fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async response => {
             if(response.ok) {
                 setList(await response.json())
