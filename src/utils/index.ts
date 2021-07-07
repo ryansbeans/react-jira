@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-export const isFalsy = (value: any) => (value === 0 ? false : !value);
+export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 // 在一个函数里,改变传入的对象本身是不好的
 
-interface ObjectProps {
-  object: {};
-}
-export const cleanObject = (object: ObjectProps) => {
+export const cleanObject = (object: object) => {
   const result = { ...object };
   Object.keys(result).forEach((key) => {
     // @ts-ignore
@@ -24,7 +21,7 @@ export const useMount = (callback: () => void) => {
   }, []);
 };
 
-export const useDebounce = (value: any, delay?: number) => {
+export const useDebounce = <V>(value: V, delay?: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     // 每当value变化后,设置一个定时器
@@ -34,4 +31,19 @@ export const useDebounce = (value: any, delay?: number) => {
   }, [value, delay]);
 
   return debouncedValue;
+};
+
+export const useArray = <V>(arr: V) => {
+  const [obj, setObj] = useState(arr); // 设置table的列表
+
+  const _value = () => {
+    return obj;
+  };
+  const _clear = () => {
+    return obj;
+  };
+  return {
+    value: _value,
+    clear: _clear,
+  };
 };
